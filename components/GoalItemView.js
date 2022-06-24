@@ -17,7 +17,7 @@ function GoalItemView(props) {
 
 const styles = StyleSheet.create({
   goalsList: {
-    backgroundColor: "#2196f3",
+    backgroundColor: "#156590",
     marginTop: 5,
     borderRadius: 5,
   },

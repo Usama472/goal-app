@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { StyleSheet, View, FlatList } from "react-native";
+import { StyleSheet, View, FlatList, Button } from "react-native";
 
 import GoalItemView from "./components/GoalItemView";
 import GoalInputItem from "./components/GoalInputItem";
@@ -7,12 +7,15 @@ import GoalInputItem from "./components/GoalInputItem";
 export default function App() {
   // goals data
   const [goalsData, setGoalsData] = useState([]);
+  // modal
+  const [goalInputModal, setGoalInputModal] = useState(false);
 
   const onAddGoal = (goal) => {
     setGoalsData((goals) => [
       ...goals,
       { name: goal, id: Math.random().toString() },
     ]);
+    setGoalInputModal(false);
   };
 
   const onDeleteHandler = (goalId) => {
@@ -21,7 +24,20 @@ export default function App() {
   return (
     <>
       <View style={styles.container}>
-        <GoalInputItem onAddGoal={onAddGoal} />
+        <GoalInputItem
+          showModal={goalInputModal}
+          onAddGoal={onAddGoal}
+          onClose={() => {
+            setGoalInputModal(false);
+          }}
+        />
+        <Button
+          color="#2196f8"
+          title="Add New Goal"
+          onPress={() => {
+            setGoalInputModal(true);
+          }}
+        />
         <View style={styles.goalsContainer}>
           <FlatList
             data={goalsData}
